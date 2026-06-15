@@ -8,9 +8,14 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Call URL
+      - name: Install Chrome & dependencies
+        run: |
+          sudo apt-get install -y chromium-browser
+
+      - name: Call URL with real browser
         run: |
           for i in 1 2 3 4 5; do
-            curl -s "https://aitrend.great-site.net/cron_thoisu.php"
+            chromium-browser --headless --no-sandbox --disable-gpu \
+              --dump-dom "https://aitrend.great-site.net/cron_thoisu.php" > /dev/null 2>&1 || true
             sleep 60
           done
