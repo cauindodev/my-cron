@@ -28,7 +28,7 @@ jobs:
           for i in 1 2 3 4 5; do
             echo "=== Lần $i - $(date) ==="
             chromium-browser --headless --no-sandbox --disable-gpu \
-              --dump-dom "https://aitrend.great-site.net/cron_thoisu.php" 2>&1 | tail -30
+              --dump-dom "https://aitrend.great-site.net/cron_thoisu.php" 2>&1 | tail -30 || true
             echo "=== Xong lần $i ==="
             [ $i -lt 5 ] && sleep 55
           done
