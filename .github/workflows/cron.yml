@@ -1,24 +1,34 @@
 name: Cron Job
 on:
   schedule:
-    - cron: '0 * * * *'    # backup: chạy mỗi giờ phòng khi chain bị đứt
-    - cron: '*/5 * * * *'  # cố gắng mỗi 5 phút
+    - cron: '0 * * * *'
+    - cron: '5 * * * *'
+    - cron: '10 * * * *'
+    - cron: '15 * * * *'
+    - cron: '20 * * * *'
+    - cron: '25 * * * *'
+    - cron: '30 * * * *'
+    - cron: '35 * * * *'
+    - cron: '40 * * * *'
+    - cron: '45 * * * *'
+    - cron: '50 * * * *'
+    - cron: '55 * * * *'
   workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 10
     steps:
       - name: Install Chrome
         run: sudo apt-get install -y chromium-browser
 
-      - name: Call URL 5 times (mỗi phút 1 lần)
+      - name: Call URL 5 times
         run: |
           for i in 1 2 3 4 5; do
             echo "=== Lần $i - $(date) ==="
             chromium-browser --headless --no-sandbox --disable-gpu \
-              --dump-dom "https://aitrend.great-site.net/cron_thoisu.php" 2>&1 | tail -20
+              --dump-dom "https://aitrend.great-site.net/cron_thoisu.php" 2>&1 | tail -30
             echo "=== Xong lần $i ==="
             [ $i -lt 5 ] && sleep 55
           done
